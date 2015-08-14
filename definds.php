@@ -9,8 +9,11 @@
  * @date 15-8-14 下午8:51
  * @author dzlin
  */
+//启动SESSION
+session_start();
+
 //程序开始执行时间
-define('START_TIME', microtime());
+define('START_TIME', microtime(true));
 
 //时间戳
 define('TIMESTAMP', time());
