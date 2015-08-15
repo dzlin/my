@@ -56,14 +56,16 @@ class Pdo
     private $options = array();
 
     /**
+     * 构造函数（暂时不使用单例模式）
+     * DSN格式
+     * mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8;
      * 
-     * @param string $dsn
-     * @param string $user
-     * @param string $pass
+     * @param string $dsn PDO DSN
+     * @param string $user 数据库用户名
+     * @param string $pass 登陆密码
      * @param array $options PDO连接选项
      */
-    private function __construct(string $dsn, string $user, string $pass,
-            $options = array())
+    public function __construct($dsn, $user, $pass, $options = array())
     {
         $this->dsn = $dsn;
         $this->user = $user;
@@ -71,14 +73,11 @@ class Pdo
         $this->options = $options;
     }
 
-    //mysql:host=127.0.0.1;port=3306;dbname=anexis_new;charset=UTF8;
-    //$dsn = 'mysql:host=' . $d['host'];
-    //$dsn .= ';port=' . $d['port'];
-    //$dsn .= ';dbname=' . $d['name'];
-    //$dsn .= ';charset=' . $d['charset'];
-
     /**
      * 数据库连接
+     * 
+     * <b>注意：没有返回值，可能会抛出异常<b>
+     * 
      * @throws \Exception
      */
     public function connect()
@@ -92,12 +91,6 @@ class Pdo
     }
 
     /**
-     * 获取连接实例
-     * @param type $d
-     * @return type \db\Pdo;
-     */
-
-    /**
      * 获取实例
      * 
      * DSN格式
@@ -109,17 +102,19 @@ class Pdo
      * @param array $options PDO选项
      * @return \db\Pdo Pdo实例
      */
-    public static function
-    getInstance(string $dsn, string $user, string $pass, $options = array())
-    {
-        if (!self::$instance instanceof self) {
-            self::$instance = new Pdo($dsn, $user, $pass, $options);
-            return self::
+    /*
+      public static function
+      getInstance(string $dsn, string $user, string $pass, $options = array())
+      {
+      if (!self::$instance instanceof self) {
+      self::$instance = new Pdo($dsn, $user, $pass, $options);
+      return self::
 
-                    $instance;
-        }
-        return self::$instance;
-    }
+      $instance;
+      }
+      return self::$instance;
+      }
+     */
 
     /**
      * 向数据库插入数据，返回受影响的行数
@@ -195,14 +190,27 @@ class Pdo
      */
     private function query($sql, $data = array())
     {
+        /*
+          $param = array(
+          ':username' => 'zhangsan',
+          ':age' => 3,
+          ); */
         try {
             $rst = $this->db->prepare($sql);
             foreach ($data as $key => &$value) {
-                if (preg_match("/(_int)$/", $key) || is_numeric($key)) {
+                /*
+                  if (preg_match("/(_int)$/", $key) || is_numeric($key)) {
+                  $rst->bindParam($key, $value, \PDO::PARAM_INT);
+                  } else {
+                  $rst->bindParam($key, $value, \PDO::PARAM_STR);
+                  } */
+                /*
+                 * 需要判断是int型还是string类型
+                 */
+                if (is_numeric($value))
                     $rst->bindParam($key, $value, \PDO::PARAM_INT);
-                } else {
+                else
                     $rst->bindParam($key, $value, \PDO::PARAM_STR);
-                }
             }
             $rst->setFetchMode(\PDO::FETCH_ASSOC);
             $rst->execute();

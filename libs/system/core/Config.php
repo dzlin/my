@@ -8,7 +8,7 @@ namespace system\core;
  * @author dzlin 
  * @datetime 2015-8-15  15:08:45
  */
-class Config implements ArrayAccess
+class Config implements \ArrayAccess
 {
 
     protected $path; // 配置文件自动加载

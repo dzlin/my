@@ -60,10 +60,23 @@ class Web
      */
     public static function echo404($msg = '')
     {
+
+        /**
+         * 年份的目录
+         */
+        $year = LOGDIR . '/' . date('Y');
+        if (!file_exists($year))
+            mkdir($year);
+        /**
+         * 月份的目录
+         */
+        $month = LOGDIR . '/' . date('Y') . '/' . date('m');
+        if (!file_exists($month))
+            mkdir($month);
         /**
          * 做日志记录
          */
-        $log = LOGDIR . '/' . date('y') . '/' . date('m') . '/';
+        $log = LOGDIR . '/' . date('Y') . '/' . date('m') . '/';
         $log .= date('d') . '.log';
         $fp = fopen($log, 'a');
         if ($fp) {

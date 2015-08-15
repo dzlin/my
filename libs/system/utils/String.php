@@ -49,4 +49,56 @@ class String
         return false;
     }
 
+    /**
+     * 生成salt
+     * @return string 用户salt串
+     */
+    public static function randSalt()
+    {
+        return self::createRandStr(8);
+    }
+
+    /**
+     * @param type $length
+     * @return string
+     */
+    /* public static function getRandStr($length)
+      {
+      $str = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $randString = '';
+      $len = strlen($str) - 1;
+      for ($i = 0; $i < $length; $i ++) {
+      $num = mt_rand(0, $len);
+      $randString .= $str[$num];
+      }
+      return $randString;
+      }
+     */
+
+    /**
+     * 随机获取长度为length的字符串，可能包含有大小写字母和数字
+     * 
+     * @param integer $length 随机字符串的长度 最大是1024
+     * @return string 获取得到的随机字符串
+     */
+    public static function createRandStr($length)
+    {
+        if (!is_numeric($length) || $length > 1024)
+            return;
+        /*
+         * 62个字符
+         */
+        $str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $strlen = 62;
+        while ($length > $strlen) {
+            $str .= $str;
+            $strlen += 62;
+        }
+        /**
+         * str_shuffle随机打乱一个字符串
+         */
+        $str = str_shuffle($str);
+        return substr($str, 0, $length);
+    }
+
 }
