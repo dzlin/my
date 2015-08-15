@@ -6,9 +6,9 @@
 return array(
     'host' => '127.0.0.1',
     'user' => 'root',
-    'password' => 'root',
+    'pass' => 'root',
     'name' => 'test',
     'port' => '3306',
-    'prefix' => 'app_',
+    'prefix' => 'dzlin_',
     'charset' => 'utf8'
 );

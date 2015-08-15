@@ -9,14 +9,18 @@
  * @date 15-8-14 下午8:51
  * @author dzlin
  */
-//启动SESSION
+/*
+ * 启动SESSION
+ */
 session_start();
 
-//程序开始执行时间
-define('START_TIME', microtime(true));
+/*
+ * 程序开始执行时间
+ */
+define('START_TIME', $_SERVER['REQUEST_TIME_FLOAT']);
 
 //时间戳
-define('TIMESTAMP', time());
+define('TIMESTAMP', $_SERVER['REQUEST_TIME']);
 
 //程序根目录
 define('PATH_ROOT', dirname(__FILE__));
@@ -29,6 +33,9 @@ define('CONFIG_DIR', PATH_ROOT . '/config');
 
 //文件上传目录
 define('UPLOADS', PATH_ROOT . '/uploads');
+
+//日志目录
+define('LOGDIR', PATH_ROOT . '/log');
 
 
 //引入类自动加载函数文件
