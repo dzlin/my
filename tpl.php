@@ -1,6 +1,6 @@
 <?php
 //引入必须包含的定义文件
-require '../definds.php';
+require '../init.php';
 
 //其他需要引入的文件
 //设置页面标题
