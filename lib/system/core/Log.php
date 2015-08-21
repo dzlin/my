@@ -21,19 +21,19 @@ class Log
 		/**
 		 * 年份的目录
 		 */
-		$year = LOGDIR . '/' . date('Y');
+		$year = LOG_DIR . '/' . date('Y');
 		if (!file_exists($year))
 			mkdir($year, 0755);
 		/**
 		 * 月份的目录
 		 */
-		$month = LOGDIR . '/' . date('Y') . '/' . date('m');
+		$month = LOG_DIR . '/' . date('Y') . '/' . date('m');
 		if (!file_exists($month))
 			mkdir($month, 0755);
 		/**
 		 * 做日志记录
 		 */
-		$log = LOGDIR . '/' . date('Y') . '/' . date('m') . '/';
+		$log = LOG_DIR . '/' . date('Y') . '/' . date('m') . '/';
 		$log .= date('d') . '.log';
 		$fp = fopen($log, 'a');
 		if ($fp) {

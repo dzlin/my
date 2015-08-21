@@ -20,27 +20,26 @@ session_start();
  */
 define('START_TIME', $_SERVER['REQUEST_TIME_FLOAT']);
 
-//时间戳
+// 时间戳
 define('TIMESTAMP', $_SERVER['REQUEST_TIME']);
 
-//程序根目录
+// 程序根目录
 define('PATH_ROOT', dirname(__FILE__));
 
-//类库目录
-define('CLASSPATH', PATH_ROOT . '/libs');
+// 类库目录
+define('LIB_DIR', PATH_ROOT . '/lib');
 
-//配置文件目录
+// 配置文件目录
 define('CONFIG_DIR', PATH_ROOT . '/config');
 
-//文件上传目录
-define('UPLOADS', PATH_ROOT . '/uploads');
+// 文件上传目录
+define('UPLOAD_DIR', PATH_ROOT . '/data/upload');
 
-//日志目录
-define('LOGDIR', PATH_ROOT . '/log');
+// 日志目录
+define('LOG_DIR', PATH_ROOT . '/data/log');
 
+// 引入类自动加载函数文件
+require 'lib/autoload.php';
 
-//引入类自动加载函数文件
-require 'autoload.php';
-
-//注册类自动加载函数
+// 注册类自动加载函数
 spl_autoload_register('autoload');

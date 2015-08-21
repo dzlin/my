@@ -285,7 +285,7 @@ class Upload
 				. ucfirst(strtolower($driver));
 		$this->uploader = new $class($config);
 		if (!$this->uploader) {
-			throw new Exception('Class Not Found. ' . $class);
+			throw new \Exception('Class Not Found. ' . $class);
 		}
 		$this->uploader = new $class($config);
 	}
