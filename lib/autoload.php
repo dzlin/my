@@ -5,7 +5,7 @@
  */
 function autoload($class)
 {
-    $classpath = CLASSPATH . '/' . str_replace('\\', '/', $class) . '.php';
+    $classpath = LIB_DIR . '/' . str_replace('\\', '/', $class) . '.php';
     if (file_exists($classpath))
         require $classpath;
     else {

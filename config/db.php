@@ -7,8 +7,8 @@ return array(
     'host' => '127.0.0.1',
     'user' => 'root',
     'pass' => 'root',
-    'name' => 'test',
+    'name' => 'iyouthteam',
     'port' => '3306',
-    'prefix' => 'dzlin_',
+    'prefix' => 'iyou_',
     'charset' => 'utf8'
 );

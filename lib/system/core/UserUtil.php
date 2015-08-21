@@ -7,7 +7,7 @@ namespace system\core;
  * @author dzlin 
  * @datetime 2015-8-15  19:14:39
  */
-class User
+class UserUtil
 {
 
     /**
