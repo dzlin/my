@@ -5,8 +5,6 @@ use module\user\dao\User;
 use system\core\UserUtil;
 use system\utils\String;
 
-echo memory_get_usage(true) . '==';
-
 // 必须引入的文件
 require '../init.php';
 
@@ -22,14 +20,31 @@ if (isset($_POST['submit']) && Web::isPost()) {
      * .email是否真实有效
      * .email是否注册过
      */
-    /**
-     * 写注册信息到数据表
-     */
+    
+    $fileds = array(
+        'email',
+        'password'
+    );
+    if (true !== Web::checkPostData($fileds)) {
+        Web::echo404('register');
+    }
+    
+    if (! String::isEmail($_POST['email'])) {
+        Web::echo404('register email');
+    }
+    
+    if (! String::isPassword($_POST['password'])) {
+        Web::echo404('register password');
+    }
     
     // user模型
     $userModel = new UserModel();
     
-    // 设置用户数据
+    if ($userModel->hasEmail($_POST['email'])) {
+        Web::echo404('register has email ' . $_POST['email']);
+    }
+    
+    // 填充用户数据
     $user = new User();
     $user->setEmail($_POST['email']);
     $user->setSalt(String::randSalt());
@@ -40,7 +55,6 @@ if (isset($_POST['submit']) && Web::isPost()) {
     // 创建用户
     $aid = $userModel->createUser($user);
     var_dump($aid);
-    echo '==' . memory_get_usage(true);
 } else {
     echo 'register';
 }

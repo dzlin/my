@@ -46,5 +46,6 @@ class Model
          * 获取连接实例
          */
         $this->pdo = new Pdo($dsn, $dbConfig['user'], $dbConfig['pass']);
+        $this->pdo->connect();
     }
 }
