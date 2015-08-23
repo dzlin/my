@@ -1,56 +1,60 @@
 <?php
-
 namespace system\db;
 
 /**
  * PDO驱动类
- * @author dzlin 
- * @datetime 2015-8-15  15:29:32
+ * 
+ * @author dzlin
+ *         @datetime 2015-8-15 15:29:32
  */
 class Pdo
 {
 
     /**
      * PDOStatement
-     * 
+     *
      * @var PDOStatement $PDOStatement
      */
     protected $PDOStatement = null;
 
     /**
      * PDO连接资源
-     * 
+     *
      * @var \PDO $db;
      */
     private $db;
 
     /**
      * 当前类实例
-     * 
+     *
      * @var \db\Pdo $instance
      */
     public static $instance = null;
 
     /**
      * pdo 连接DSN
+     * 
      * @var string $dsn
      */
     private $dsn = null;
 
     /**
      * 数据库用户名
+     * 
      * @var string $user
      */
     private $user = null;
 
     /**
      * 登陆密码
-     * @var string $pssword 
+     * 
+     * @var string $pssword
      */
     private $pass = null;
 
     /**
      * PDO连接选项
+     * 
      * @var array $options
      */
     private $options = array();
@@ -59,11 +63,15 @@ class Pdo
      * 构造函数（暂时不使用单例模式）
      * DSN格式
      * mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8;
-     * 
-     * @param string $dsn PDO DSN
-     * @param string $user 数据库用户名
-     * @param string $pass 登陆密码
-     * @param array $options PDO连接选项
+     *
+     * @param string $dsn
+     *            PDO DSN
+     * @param string $user
+     *            数据库用户名
+     * @param string $pass
+     *            登陆密码
+     * @param array $options
+     *            PDO连接选项
      */
     public function __construct($dsn, $user, $pass, $options = array())
     {
@@ -75,16 +83,15 @@ class Pdo
 
     /**
      * 数据库连接
-     * 
+     *
      * <b>注意：没有返回值，可能会抛出异常<b>
-     * 
+     *
      * @throws \Exception
      */
     public function connect()
     {
         try {
-            $this->db = new \PDO($this->dsn, $this->user, $this->pass,
-                    $this->options);
+            $this->db = new \PDO($this->dsn, $this->user, $this->pass, $this->options);
         } catch (\PDOException $e) {
             throw new \Exception($e->getMessage());
         }
@@ -92,35 +99,39 @@ class Pdo
 
     /**
      * 获取实例
-     * 
+     *
      * DSN格式
      * mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8;
-     * 
-     * @param string $dsn PDO DSN
-     * @param string $user 数据库用户名
-     * @param string $pass 登陆密码
-     * @param array $options PDO选项
+     *
+     * @param string $dsn
+     *            PDO DSN
+     * @param string $user
+     *            数据库用户名
+     * @param string $pass
+     *            登陆密码
+     * @param array $options
+     *            PDO选项
      * @return \db\Pdo Pdo实例
      */
     /*
-      public static function
-      getInstance(string $dsn, string $user, string $pass, $options = array())
-      {
-      if (!self::$instance instanceof self) {
-      self::$instance = new Pdo($dsn, $user, $pass, $options);
-      return self::
-
-      $instance;
-      }
-      return self::$instance;
-      }
-     */
-
-    /**
-     * 向数据库插入数据，返回受影响的行数
+     * public static function
+     * getInstance(string $dsn, string $user, string $pass, $options = array())
+     * {
+     * if (!self::$instance instanceof self) {
+     * self::$instance = new Pdo($dsn, $user, $pass, $options);
+     * return self::
      *
-     * @param string $sql
-     * @param array $data
+     * $instance;
+     * }
+     * return self::$instance;
+     * }
+     */
+    
+    /**
+     * 向数据库插入数据，返回自动增长的ID值
+     *
+     * @param string $sql            
+     * @param array $data            
      * @return mixed
      */
     public function add($sql, $data)
@@ -132,10 +143,11 @@ class Pdo
     /**
      * 向数据库更新数据，返回受影响的行数
      *
-     * @param string $sql
-     * @param array $data
+     * @param string $sql            
+     * @param array $data            
      * @return mixed
-     */ public function update($sql, $data)
+     */
+    public function update($sql, $data)
     {
         $result = $this->query($sql, $data);
         return $result->rowCount();
@@ -144,10 +156,11 @@ class Pdo
     /**
      * 向数据库查询数据，返回结果集
      *
-     * @param string $sql
-     * @param array $data
+     * @param string $sql            
+     * @param array $data            
      * @return mixed
-     */ public function findOne($sql, $data)
+     */
+    public function findOne($sql, $data)
     {
         $result = $this->query($sql, $data);
         return $result->fetch();
@@ -156,8 +169,8 @@ class Pdo
     /**
      * 向数据库查询数据，返回结果集
      *
-     * @param string $sql
-     * @param array $data
+     * @param string $sql            
+     * @param array $data            
      * @return mixed
      */
     public function find($sql, $data = array())
@@ -169,8 +182,8 @@ class Pdo
     /**
      * 删除数据，返回布尔值
      *
-     * @param string $sql
-     * @param array $data
+     * @param string $sql            
+     * @param array $data            
      * @return boolean
      */
     public function remove($sql, $data)
@@ -182,28 +195,32 @@ class Pdo
     }
 
     /**
-     * 
-     * @param string $sql 要执行的sql语句
-     * @param array $data 要绑定参数（可选）
+     *
+     * @param string $sql
+     *            要执行的sql语句
+     * @param array $data
+     *            要绑定参数（可选）
      * @return type
      * @throws \Exception
      */
     private function query($sql, $data = array())
     {
         /*
-          $param = array(
-          ':username' => 'zhangsan',
-          ':age' => 3,
-          ); */
+         * $param = array(
+         * ':username' => 'zhangsan',
+         * ':age' => 3,
+         * );
+         */
         try {
             $rst = $this->db->prepare($sql);
             foreach ($data as $key => &$value) {
                 /*
-                  if (preg_match("/(_int)$/", $key) || is_numeric($key)) {
-                  $rst->bindParam($key, $value, \PDO::PARAM_INT);
-                  } else {
-                  $rst->bindParam($key, $value, \PDO::PARAM_STR);
-                  } */
+                 * if (preg_match("/(_int)$/", $key) || is_numeric($key)) {
+                 * $rst->bindParam($key, $value, \PDO::PARAM_INT);
+                 * } else {
+                 * $rst->bindParam($key, $value, \PDO::PARAM_STR);
+                 * }
+                 */
                 /*
                  * 需要判断是int型还是string类型
                  */
@@ -214,7 +231,7 @@ class Pdo
             }
             $rst->setFetchMode(\PDO::FETCH_ASSOC);
             $rst->execute();
-
+            
             $errorInfo = $rst->errorInfo();
             if ($errorInfo[2]) {
                 $errInfo = $rst->errorInfo();
@@ -231,7 +248,6 @@ class Pdo
      */
     public function beginTransaction()
     {
-
         $this->db->beginTransaction();
     }
 
@@ -261,13 +277,12 @@ class Pdo
 
     /**
      * 执行原生sql语句，返回关联结果集
-     * 
-     * @param string $sql
+     *
+     * @param string $sql            
      */
     public function sqlQuery($sql)
     {
         $result = $this->db->query($sql, \PDO::FETCH_ASSOC);
         return $result->fetchAll();
     }
-
 }

@@ -4,11 +4,9 @@
  */
 require '../init.php';
 
-use system\db\Pdo;
-use system\core\Config;
 use system\utils\String;
 use system\utils\Web;
-use system\core\Redis as IRedis;
+use module\user\model\UserModel;
 
 /**
  * 登陆处理
@@ -35,78 +33,17 @@ if (isset($_POST['submit']) && Web::isPost()) {
         Web::echo404('login isPassword');
     
     /**
-     * 加载数据库配置文件
+     * 检查登陆，匹配密码
      */
-    $config = new Config(CONFIG_DIR);
-    $dbConfig = $config['db'];
-    
-    /**
-     * 数据库pdo连接dsn
-     */
-    $dsn = 'mysql:host=' . $dbConfig['host'];
-    $dsn .= ';port=' . $dbConfig['port'];
-    $dsn .= ';dbname=' . $dbConfig['name'];
-    $dsn .= ';charset=' . $dbConfig['charset'];
-    
-    /**
-     * 获取连接实例
-     */
-    $pdo = new Pdo($dsn, $dbConfig['user'], $dbConfig['pass']);
-    
-    /**
-     * 连接数据库
-     */
-    $pdo->connect();
-    
-    /**
-     * sql查询语句 根据email获取登录密码和salt
-     */
-    $sql = 'select `password` pwd, `salt` scode,';
-    $sql .= '`uid` from dzlin_user where `email` = :email';
-    $data = array(
-        ':email' => $_POST['email']
-    );
-    
-    /**
-     * 查询没有数据返回false
-     */
-    $user = $pdo->findOne($sql, $data);
-    if ($user) {
-        echo json_encode($user);
+    $userModel = new UserModel();
+    $bool = $userModel->userLogin($_POST['email'], $_POST['password']);
+    if ($bool) {
+        echo 'login success';
+    } else {
+        echo 'login failed';
     }
-    /**
-     * 登陆成功后Session保存uid
-     */
-    $_SESSION['uid'] = $user['uid'];
-    
-    /**
-     * redis保存用户数据
-     * 1.加载redis配置
-     * 2.实例化redis工具类
-     * 3.设置值
-     */
-    $rdConfig = $config['redis'];
-    
-    /**
-     * redis缓存数据
-     * pwd不缓存
-     */
-    unset($user['pwd']);
-    $redis = new IRedis($rdConfig['host'], $rdConfig['port']);
-    $res = $redis->set($rdConfig['userPrefix'] . $user['uid'], $user);
-    var_dump($res);
-    /*
-     * $rd = new \Redis();
-     * $rd->connect($redisConfig['host'], $redisConfig['port']);
-     * $keys = $rd->keys('u*');
-     * var_dump($keys);
-     */
-    $redis->get('u1', $return);
-    var_dump($return);
-    
-    die();
 }
-
+die;
 // 其他需要引入的文件
 // 设置页面标题
 $pageTitle = '登陆';

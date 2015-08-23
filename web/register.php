@@ -13,7 +13,6 @@ require '../init.php';
  */
 if (isset($_POST['submit']) && Web::isPost()) {
     /**
-     * TODO 做数据检查过滤
      * .是否提交数据
      * .email是否符合格式
      * .password是否符合格式
