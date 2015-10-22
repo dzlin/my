@@ -29,5 +29,6 @@ $pageTitle = 'title';
 <?php
 //程序执行结束时间或是
 //可能需要做一些提交后的处理
+//测试代码
 $endTime = microtime(true);
 
