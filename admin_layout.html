@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <title>index</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        .top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-color: #006478;
+            padding: 0;
+        }
+
+        .menu {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            bottom: 0;
+            width: 140px;
+            background-color: #111;
+            overflow: auto;
+        }
+
+        .menu-active {
+            background-color: #333;
+        }
+
+        .submenu {
+            position: fixed;
+            top: 50px;
+            left: 140px;
+            bottom: 0;
+            width: 140px;
+            background-color: #222;
+        }
+
+        .submenu-active {
+            background-color: #444;
+        }
+
+        .main {
+            position: fixed;
+            top: 50px;
+            left: 280px;
+            right: 0;
+            bottom: 0;
+        }
+
+        .main iframe {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top">
+    <style>
+        .top h1 {
+            padding: 0 10px;
+            margin: 0;
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+            font-size: 22px;
+            color: #ffffff;
+        }
+
+        .top .admin {
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+            margin-right: 20px;
+        }
+
+        .top .admin a {
+            color: #ffffff;
+        }
+    </style>
+    <h1>
+        大学社团协同管理平台
+    </h1>
+    <div class="admin pull-right">
+        <a href="#">
+            <span class="glyphicon glyphicon-user"></span>&nbsp;张三</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="#">
+            <span class="glyphicon glyphicon-th-large"></span>&nbsp;返回首页</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="#">
+            <span class="glyphicon glyphicon-off"></span>&nbsp;退出</a>
+    </div>
+</div>
+
+<div class="menu">
+    <style>
+        .menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu ul li {
+            height: 60px;
+            text-align: center;
+        }
+
+        .menu ul li a {
+            /*font-family: "Microsoft YaHei", sans-serif;*/
+            font-size: 18px;
+            height: 60px;
+            line-height: 60px;
+            color: #ffffff;
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .menu ul li a:hover {
+            background-color: #333;
+        }
+    </style>
+    <ul>
+        <li><a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-home"></span>
+            首页</a>
+        </li>
+        <li class="menu-active"><a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-user"></span>
+            成员</a></li>
+        <li><a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-link"></span>
+            资讯</a></li>
+        <li><a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-envelope"></span>
+            通知
+            <!--<code>4</code>-->
+        </a></li>
+        <li><a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-th"></span>
+            活动</a></li>
+        <li><a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-picture"></span>
+            相册</a></li>
+        <li><a href="javascript:void(0);">
+            <span class="glyphicon glyphicon-cog"></span>
+            设置</a></li>
+    </ul>
+</div>
+
+<div class="submenu">
+    <style>
+        .submenu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .submenu ul li {
+            height: 40px;
+            text-align: center;
+        }
+
+        .submenu ul li a {
+            font-size: 14px;
+            height: 40px;
+            line-height: 40px;
+            color: #ffffff;
+            display: inline-block;
+            /*padding: 0 10px;*/
+            width: 100%;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .submenu ul li a:hover {
+            background-color: #444;
+        }
+    </style>
+    <ul>
+        <li class="submenu-active">
+            <a href="#">成员列表</a>
+        </li>
+        <li>
+            <a href="#">添加成功</a>
+        </li>
+        <li>
+            <a href="#">编辑成员</a>
+        </li>
+        <li>
+            <a href="#">成员详细</a>
+        </li>
+    </ul>
+</div>
+
+<div class="main">
+    <iframe frameborder="0" name="main" src="home.html"></iframe>
+</div>
+
+
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+</body>
+</html>
